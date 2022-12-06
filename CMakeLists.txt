@@ -9,6 +9,9 @@ project(circular_waiter_robot_description)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   rospy
+  std_msgs
+  geometry_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -103,8 +106,8 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES fusion2urdf
-#  CATKIN_DEPENDS rospy
-#  DEPENDS system_lib
+ CATKIN_DEPENDS rospy std_msgs geometry_msgs message_runtime
+ DEPENDS system_lib
 )
 
 ###########
@@ -161,6 +164,10 @@ include_directories(
 #   scripts/my_python_script
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
+
+catkin_install_python(PROGRAMS scripts/save_check_points.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
