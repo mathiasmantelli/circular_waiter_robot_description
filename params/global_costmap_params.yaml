@@ -3,14 +3,14 @@ global_costmap:
   global_frame: map
   robot_base_frame: base_link
 
-  update_frequency: 10.0
+  update_frequency: 3.0
   publish_frequency: 10.0
   transform_tolerance: 0.5
   obstacle_range: 10.0
   raytrace_range: 15.0
   width: 30
   height: 30
-  static_map: true
+  #static_map: true
   rolling_window: true
   plugins: 
       - {name: map_layer,      type: "costmap_2d::StaticLayer"}

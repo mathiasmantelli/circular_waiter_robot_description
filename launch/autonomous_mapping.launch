@@ -2,8 +2,6 @@
 
 <launch>
     <!-- Arguments -->
-    <arg name="map_file" default="$(find circular_waiter_robot_description)/maps/map.yaml"/>  
-    <arg name="lane_map" default="$(find circular_waiter_robot_description)/maps/lane_map.yaml"/>  
     <arg name="move_forward_only" default="true"/>
         
     <!-- Rviz and robot description -->
@@ -12,19 +10,15 @@
     <!-- Gazebo and the 3D world -->
     <include file="$(find circular_waiter_robot_description)/launch/gazebo.launch"/>
 
-    <!-- Map server -->
-    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
-
-    <node pkg="map_server" name="map_server2" type="map_server" args="$(arg lane_map)">
-        <remap from="/map" to="/lane_map"/>
-    </node>
-
-
-    <!-- AMCL -->
-    <include file="$(find circular_waiter_robot_description)/launch/amcl.launch"/>
+    <!-- Gmapping -->
+    <include file="$(find circular_waiter_robot_description)/launch/gmapping.launch"/>
+    <!-- <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" args="scan:=/scan">
+        <param name="~delta" value="0.05" />
+        <param name="~map_update_interval" value="1" />
+    </node> -->
 
     <!-- Move_base -->
-    <include file="$(find circular_waiter_robot_description)/launch/move_base.launch">    
+    <include file="$(find circular_waiter_robot_description)/launch/move_base_mapping.launch">    
         <arg name="move_forward_only" value="$(arg move_forward_only)"/>
     </include>
 

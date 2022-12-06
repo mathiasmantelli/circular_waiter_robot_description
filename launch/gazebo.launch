@@ -1,6 +1,4 @@
 <launch>
-  <param name="robot_description" command="$(find xacro)/xacro $(find circular_waiter_robot_description)/urdf/circular_waiter_robot.xacro"/>
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model circular_waiter_robot"/>
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find circular_waiter_robot_description)/world/restaurant_indoor.world"/>
     <arg name="paused" value="false"/>
@@ -9,4 +7,6 @@
     <arg name="headless" value="false"/>
     <arg name="debug" value="false"/>
   </include>
+  <param name="robot_description" command="$(find xacro)/xacro $(find circular_waiter_robot_description)/urdf/circular_waiter_robot.xacro"/>
+  <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -unpause -model circular_waiter_robot -x 0.0 -y 0.0 -z 0.0"/>
 </launch>
